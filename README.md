@@ -107,7 +107,7 @@ function services () {
   // now pass this service object on to discovery
   // https://developers.google.com/hangouts/chat/reference/rest/v1/spaces/get
   const endpoint = Requests.discovery({name: 'chat', version: 'v1', resource: 'spaces', method: 'get'}, {
-    oauth: this.service
+    oauth: service
   });
   
   const json = endpoint.get({name: 'spaces/<name>'}).resolve();

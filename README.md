@@ -60,7 +60,7 @@ function up_one_level() {
   const endpoint = Req.discovery({name: 'sheets', version: 'v4', resource: 'spreadsheets', method: 'get'});
   
   // so at that endpoint we need a get request, we can get the spreadsheet title and the values in the ranges
-  const method = endpoint.get({spreadsheetId: '1PFbLiKXm0NhAOklDB46fXbukKNKxHkN_h3AlRde8Diw'}, {
+  const method = endpoint.get({spreadsheetId: '<id>'}, {
     params: {
       ranges: ['Sheet1!A2:B4', 'Sheet1!A1:B1'],
     }

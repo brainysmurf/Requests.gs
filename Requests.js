@@ -1,11 +1,38 @@
 /**
  * Interacting with Google APIs, made a cinch
  * @author Adam Morris https://classroomtechtools.com classroomtechtools.ctt@gmail.com  
- * @lastmodified 11 April 2020
- * @version 0.6 Adam Morris: First draft with oauth fix
+ * @lastmodified 12 April 2020
+ * @version 0.7 Adam Morris: First draft with UrlFetchApp.fetchAll implemeneted
  * @library MsIomH3IL48mShjNoiUoRiq8b30WIDiE_ (not open to public yet)
  */
- 
+
+
+class Batch {
+  /*
+   * 
+   */ 
+   
+  constructor () {
+    this.queue = [];
+  }
+  
+  /*
+   * Add request to queue
+   * @param {Request} an instance of request
+   */
+  add (request) {
+    const [_, obj] = request.requestObject({embedUrl: true});
+    this.queue.push(obj);
+  }
+  
+  fetch () {
+    return UrlFetchApp.fetchAll(this.queue).map( (response, idx) => {
+      const request = this.queue[idx];
+      return new Response_({response, request});
+    });
+  }
+}
+
 
 class DiscoveryCache_ {
     constructor () {
@@ -401,6 +428,12 @@ class Requests_ {
                       .setScope(settings.scopes);
     return oauthService;
   }  
+  
+  static batchRequests ({...kwargs}={}) {
+    const b = new Batch();
+    const r = new Requests_(kwargs)
+    return [b, r];
+  }
 
 }
 

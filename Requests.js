@@ -2,7 +2,7 @@
  * Interacting with Google APIs, made a cinch
  * @author Adam Morris https://classroomtechtools.com classroomtechtools.ctt@gmail.com  
  * @lastmodified 11 April 2020
- * @version 0.5 Adam Morris: First draft
+ * @version 0.6 Adam Morris: First draft with oauth fix
  * @library MsIomH3IL48mShjNoiUoRiq8b30WIDiE_ (not open to public yet)
  */
  
@@ -95,7 +95,6 @@ class Utils_ {
   interpolate (targetString, params) {
     const names = Object.keys(params);
     const vals = Object.values(params);
-    Logger.log(names);
     return new Function(...names, `return \`${targetString}\`;`)(...vals);
   }
   
@@ -211,12 +210,6 @@ class Request_ {
       return this.url + Requests_.utils.makeQueryString(this.params);
     })();
     
-    // we'll derive the oauth token, if applicable, here
-    // remain backward compatible with Oauth2 lib
-    if (this.oauth) {
-      this.headers['Authorization'] = 'Bearer ' + (this.oauth.token || this.oauth.getAccessToken());
-    }
-
     // we'll derive the oauth token upon request, if applicable, here
     // keep backward compatible with Oauth2 lib
     if (this.oauth) {
@@ -326,9 +319,6 @@ class Requests_ {
     if (Object.keys(discovery).length > 0 && Requests_.utils.validateDiscovery(discovery)) {      
       this.disc = new DiscoveryCache_();
       this.baseUrl = Requests_.utils.translateToTemplate( this.disc.getUrl(discovery) );
-    }
-      if (this.oauth) {
-      this.stickyHeaders['Authorization'] = 'Bearer ' + (this.oauth === 'me' ? ScriptApp.getOAuthToken() : this.oauth);
     }
     
     // set oauth to a basic class

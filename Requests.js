@@ -382,7 +382,7 @@ class Requests_ {
     return new Utils_();
   }
   
-  static discovery ({name=D_.req, version=D_.req, resource=D_.req, method=D_.req, oauth="me", ...kwargs}={}) {
+  static discovery ({name=D_.req, version=D_.req, resource=D_.req, method=D_.req, ...kwargs}={}, {oauth="me"}={}) {
     D_.extra(kwargs);
     const discovery = {
       name: name,

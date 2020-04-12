@@ -21,7 +21,7 @@ function lowest_level() {
   const sheetsGetEndpoint = Requests.init({baseUrl: "https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}", oauth: "me"});
     
   // request object for endpoint, which is a "get" request and substitues <id> for spreadsheetId
-  const request = sheetsGetEndpoint.get({spreadsheetId: '1PFbLiKXm0NhAOklDB46fXbukKNKxHkN_h3AlRde8Diw'});
+  const request = sheetsGetEndpoint.get({spreadsheetId: '<id>'});
   
   // it includes the necessary authorization headers
   Logger.log(request.headers);

@@ -1,5 +1,13 @@
 # Requests.gs
 
+## Getting started
+
+Add it as a library (not available to public yet). For code below, it is added with `Requests` as identifier
+
+The `init` method calls `new` on the class and passes params on.
+
+The `lib` method returns the class itself, which has convenience functions on it for ease of use.
+
 ## Illustration by example
 
 ```js

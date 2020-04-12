@@ -341,8 +341,6 @@ class Requests_ {
     if (Object.keys(interpolations).length > 0) {
       if (url) throw new Error("Expecting no url parameter for interpolation: url cannot be used");
       if (!this.baseUrl) throw new Error("Expecting baseUrl for interpolation");
-      Logger.log(interpolations);
-      Logger.log(this.baseUrl);
       options.url = Requests_.utils.interpolate(this.baseUrl, interpolations);
     } else if (url !== null) {
       options.url = url;
